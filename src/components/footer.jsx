@@ -4,7 +4,7 @@ function Footer() {
             <div className="footer-copyright">
                 <div className="container">
                     © {new Date().getFullYear()} Petikov Vladimir
-                    <a className="dm" href="#">Repo</a>
+                    <a className="grey-text text-lighten-4 right" href="#!">Repo</a>
                 </div>
             </div>
         </footer>

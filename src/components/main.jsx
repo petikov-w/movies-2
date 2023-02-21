@@ -1,13 +1,11 @@
-import '../style.scss';
+import styles from '../style.scss';
 
 function Main() {
-    const content = {
-        minHeight: "calc(100vh - 70px - 64px)",
-        padding: "1.5rem 0"
-    }
+
+    let sdf =[styles.content, styles.container];
+    sdf = sdf.join(' ')
     return (
-        // <main className='container' style={content}>
-        <main className='container content'>
+        <main className ={sdf}>
            Привет!!!
         </main>
         )
