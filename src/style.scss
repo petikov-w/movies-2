@@ -14,6 +14,18 @@ nav {
 }
 
 .container {
-  max-width: 1280px;
+  max-width: 1040px;
   margin: 0 auto;
+}
+
+.movies {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 10px;
+}
+
+.text-title {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: red;
 }
