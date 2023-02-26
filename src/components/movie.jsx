@@ -21,10 +21,9 @@ function Movie (props) {
             {/*<span className="card-title activator grey-text text-darken-4">{nameRu}</span>*/}
             <span className="text-title" style={textTitle}>{nameRu}</span>
             <div style={flex2}>
-                <p>{rating}</p>
+                <p>!{rating}.indexOf('%') > -1 ? {rating} : ""</p>
                 <p>{year}</p>
             </div>
-
         </div>
     </div>
 }
