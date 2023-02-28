@@ -1,5 +1,5 @@
-import {Movie} from './movie'
-import styles from '../style.scss';
+import {Movie} from '../Movie/Movie'
+import styles from './Movies.module.scss';
 
 function Movies(props) {
   const { movies } = props;

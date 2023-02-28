@@ -1,7 +1,7 @@
 import React from 'react';
-import {Header} from "./components/header";
-import {Footer} from "./components/footer";
-import {Main} from "./components/main";
+import {Header} from "../Header/Header";
+import {Footer} from "../Footer/Footer";
+import {Main} from "../Main/Main";
 
 
 // const onClickEvent = (e) => {
