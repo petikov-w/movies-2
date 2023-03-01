@@ -1,4 +1,4 @@
-import {Movie} from '../Movie/Movie'
+import {Movie} from '../Movie'
 import styles from './Movies.module.scss';
 
 function Movies(props) {

@@ -1,7 +1,8 @@
 import React from 'react';
-import {Header} from "../Header/Header";
-import {Footer} from "../Footer/Footer";
-import {Main} from "../Main/Main";
+import {Header} from "../Header";
+import {Footer} from "../Footer";
+import {Maink} from "../Main/Maink";
+import {Mainfn} from "../Main/Mainfn";
 
 
 // const onClickEvent = (e) => {
@@ -13,7 +14,7 @@ const App = () => {
     return (
         <React.Fragment>
             <Header />
-            <Main />
+            <Mainfn />
             <Footer />
         </React.Fragment>
 
