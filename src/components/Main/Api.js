@@ -8,11 +8,13 @@ export const api_off = {
 }
 
 
-export const api_query = (page) => {
-    // let result={};
-    console.log(api_noff.API_URL + page);
-    const result = fetch(api_noff.API_URL + page, {
-        headers: { "Content-Type": "application/json", "X-API-KEY": api_noff.API_KEY}});
-    return result;
-
+export const  api_query = (page) => {
+    return fetch(api_noff.API_URL + page, {
+        headers: { "Content-Type": "application/json", "X-API-KEY": api_noff.API_KEY},})
+        .then((responce) => responce.json())
+        .then(data => (data))
 }
+
+
+
+

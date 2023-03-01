@@ -1,4 +1,3 @@
-//import '../../style.scss';
 import styles from './Movie.module.scss'
 
 function Movie (props) {

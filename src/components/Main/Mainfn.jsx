@@ -3,7 +3,7 @@ import {Movies} from "../Movies";
 import styles from "./Main.module.scss"
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
-import {api_noff, api_query} from './Api'
+import {api_query} from './Api'
 
 export const Mainfn = () => {
     const [ movies, setMovies ] = useState([])
@@ -12,35 +12,18 @@ export const Mainfn = () => {
 
     const styleMain =[styles.content, styles.container].join(' ');
     const stylePagination =[styles.pagination, styles.container].join(' ');
+    const handleChange = (event, p) => {setCurrentPage(p)}
 
     useEffect(() => {
-        console.log(west)
-        const west = api_query(currentPage)
-            console.log(west.json());
-          //  console.log(west.pagesCount);
-            // setMovies(west.films);
-            // setPagesCount(west.pageCount);
-        }
-        // fetch(api_noff.API_URL + currentPage, {
-        //     headers: { "Content-Type": "application/json", "X-API-KEY": api_noff.API_KEY},})
-        //     .then((responce) => responce.json())
-        //     .then((data) => {setMovies(data.films), setPagesCount(data.pagesCount)})}
-        ,[]);
+        //api_query(currentPage).then(data => console.log(data))
+        api_query(currentPage).then((data) => {setMovies(data.films), setPagesCount(data.pagesCount)})},[]);
 
     useEffect(() => {
-        console.log(currentPage);
-        fetch(api_noff.API_URL + currentPage, {
-                headers: {"Content-Type": "application/json", "X-API-KEY": api_noff.API_KEY},})
-                .then( (responce) => responce.json())
-                .then((data) => { setMovies(data.films)
-                                setPagesCount(data.pagesCount)})}, [currentPage])
-    const handleChange = (event, p) => {
-        setCurrentPage(p)
-    }
+        api_query(currentPage).then((data) => {setMovies(data.films), setPagesCount(data.pagesCount)})},[currentPage]);
 
     return (
 
-        <main >
+        <main >/
             <Stack spacing={2}>
                 <Pagination count={pagesCount}
                             color="primary"
