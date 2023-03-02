@@ -23,7 +23,7 @@ export const Mainfn = () => {
 
     return (
 
-        <main >/
+        <main >
             <Stack spacing={2}>
                 <Pagination count={pagesCount}
                             color="primary"
