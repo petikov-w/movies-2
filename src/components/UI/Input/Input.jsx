@@ -1,21 +1,16 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
 
-// export default function BasicTextFields() {
-export default function Input() {
+
+export const InputSearch = () => {
     return (
-        <Box
-            component="form"
-            sx={{
-              '& > :not(style)': {width: '50ch' },
-            }}
-            noValidate
-            autoComplete="off"
-        >
-            <TextField  />
-            {/*<TextField id="filled-basic" label="Filled" variant="filled" />*/}
-            {/*<TextField id="standard-basic" label="Standard" variant="standard" />*/}
-        </Box>
+        <form className="s12">
+            {/*<div className="row">*/}
+            {/*    <div className="input-field">*/}
+                    <i className="material-icons prefix">search</i>
+                    <input type="text" className="validate"/>
+                    {/*<input id="icon_prefix" type="text" className="validate"/>*/}
+            {/*    </div>*/}
+            {/*</div>*/}
+        </form>
     );
 }
