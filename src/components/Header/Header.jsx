@@ -44,7 +44,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
         transition: theme.transitions.create('width'),
         width: '100%',
         [theme.breakpoints.up('sm')]: {
-            width: '52ch', //12ch
+            width: '12ch', //12ch
             '&:focus': {
                 width: '20ch',
             },
@@ -53,34 +53,19 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 // export default function SearchAppBar() {
- export default function Header() {
+ export default function Header(props) {
      const [ movSearch, setMovSearch ] = useState("")
-    const handleSearch = (event) => {
-        // alert('Будем искать !!!')
-        setMovSearch(event.target.value)
-    }
-     useEffect(() => {
-         alert(movSearch)},[movSearch]);
+    const handleSearch = (event) => {props.updateData(event.target.value)}
+     // useEffect(() => {
+     //     // alert(movSearch)
+     // },[movSearch]);
 
-     // handleChange = (event) => {
-     //     this.setState({[event.target.name]: event.target.value})
-     // }
     return (
         <Box sx={{ flexGrow: 1 }}>
             <AppBar position="static">
                 <Toolbar>
-                    <IconButton
-                        size="large"
-                        edge="start"
-                        //onClick= {handleSearch}
-                        color="inherit"
-                        aria-label="open drawer"
-                        sx={{ mr: 2 }}
-                    >
-                        <MenuIcon />
-                    </IconButton>
                     <Typography
-                        variant="h6"
+                        variant="h5"
                         noWrap
                         component="div"
                         sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}

@@ -3,12 +3,13 @@ import {Movies} from "../Movies";
 import styles from "./Main.module.scss"
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
-import {api_query} from './Api'
+import {api_query, api_query_search} from './Api'
 
-export const Mainfn = () => {
+export const Mainfn = (props) => {
     const [ movies, setMovies ] = useState([])
     const [ pagesCount, setPagesCount ] = useState(0)
     const [ currentPage, setCurrentPage ] = useState(1)
+    const [ Search, setSearch ] = useState("")
 
     const styleMain =[styles.content, styles.container].join(' ');
     const stylePagination =[styles.pagination, styles.container].join(' ');
@@ -19,7 +20,28 @@ export const Mainfn = () => {
         api_query(currentPage).then((data) => {setMovies(data.films), setPagesCount(data.pagesCount)})},[]);
 
     useEffect(() => {
-        api_query(currentPage).then((data) => {setMovies(data.films), setPagesCount(data.pagesCount)})},[currentPage]);
+        if (props.search == "")
+                api_query(currentPage).then((data) => {setMovies(data.films), setPagesCount(data.pagesCount)})},[currentPage]);
+
+    useEffect(() => { console.log("==== movies ====>>> ", movies)} ,[movies]);
+
+    useEffect(() => {
+            if (props.search != "") {
+                api_query_search(currentPage, props.search).then((data) => {
+                    setMovies(data.films),
+                        setPagesCount(data.pagesCount)
+                })
+            } else {
+               // setCurrentPage(1)
+                api_query(currentPage).then((data) => {
+                    setMovies(data.films), setPagesCount(data.pagesCount)
+                })
+            }
+        }
+           // console.log("==== mainfn ====>>> ", props.search);
+
+        ,[props.search, currentPage]);
+
 
     return (
 

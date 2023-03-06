@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import Header from "../Header/Header";
 import {Footer} from "../Footer";
 //import {Maink} from "../Main/Maink";
@@ -11,10 +11,17 @@ import {Mainfn} from "../Main/Mainfn";
 // }
 
 const App = () => {
+   const [ movSearch, setMovSearch ] = useState("")
+   const updateData = (value) => {
+       setMovSearch(value)
+    }
+    useEffect(() => {
+        console.log("==== App ====>>> ", movSearch);
+    },[movSearch]);
     return (
         <React.Fragment>
-            <Header />
-            <Mainfn />
+            <Header updateData={updateData}/>
+            <Mainfn search={movSearch}/>
             <Footer />
         </React.Fragment>
 
