@@ -9,38 +9,56 @@ export const Mainfn = (props) => {
     const [ movies, setMovies ] = useState([])
     const [ pagesCount, setPagesCount ] = useState(0)
     const [ currentPage, setCurrentPage ] = useState(1)
-    const [ Search, setSearch ] = useState("")
+    const [ Search, setSearch ] = useState(false)
 
     const styleMain =[styles.content, styles.container].join(' ');
     const stylePagination =[styles.pagination, styles.container].join(' ');
     const handleChange = (event, p) => {setCurrentPage(p)}
 
     useEffect(() => {
-        //api_query(currentPage).then(data => console.log(data))
         api_query(currentPage).then((data) => {setMovies(data.films), setPagesCount(data.pagesCount)})},[]);
 
-    useEffect(() => {
-        if (props.search == "")
-                api_query(currentPage).then((data) => {setMovies(data.films), setPagesCount(data.pagesCount)})},[currentPage]);
 
+    // currentPage
+    useEffect(() => {
+        // if (props.search == "")
+        //         api_query(currentPage).then((data) => {setMovies(data.films), setPagesCount(data.pagesCount)})}
+    if (props.search != "" && Search) {
+        setSearch(true)
+        api_query_search(currentPage, props.search).then((data) => {
+            setMovies(data.films), setPagesCount(data.pagesCount)})
+    } else {
+        // setSearch(false)
+        //setCurrentPage(1)
+        api_query(currentPage).then((data) => {
+            setMovies(data.films), setPagesCount(data.pagesCount)})} },[currentPage]);
+
+    // movies
     useEffect(() => { console.log("==== movies ====>>> ", movies)} ,[movies]);
+
+    // props.search
+    useEffect(() => {
+            // if (props.search != "") {
+            //     setSearch(true)
+            //     api_query_search(currentPage, props.search).then((data) => {
+            //         setMovies(data.films), setPagesCount(data.pagesCount)})
+            // } else {
+            //     setSearch(false)
+            //     //setCurrentPage(1)
+            //     api_query(currentPage).then((data) => {
+            //         setMovies(data.films), setPagesCount(data.pagesCount)})
+            // }
+            props.search!="" ? setSearch(false) : setSearch(true)
+            console.log("========>>> ", Search)
+        }
+
+        ,[props.search]);
+        // ,[props.search, currentPage]);
 
     useEffect(() => {
             if (props.search != "") {
                 api_query_search(currentPage, props.search).then((data) => {
-                    setMovies(data.films),
-                        setPagesCount(data.pagesCount)
-                })
-            } else {
-               // setCurrentPage(1)
-                api_query(currentPage).then((data) => {
-                    setMovies(data.films), setPagesCount(data.pagesCount)
-                })
-            }
-        }
-           // console.log("==== mainfn ====>>> ", props.search);
-
-        ,[props.search, currentPage]);
+                    setMovies(data.films), setPagesCount(data.pagesCount)})}},[Search]);
 
 
     return (
