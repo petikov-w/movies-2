@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useRef} from "react";
 import {Movies} from "../Movies";
 import styles from "./Main.module.scss"
 import Pagination from '@mui/material/Pagination';
@@ -12,48 +12,45 @@ export const Mainfn = (props) => {
     const [ currentPage, setCurrentPage ] = useState(1)
     const [ currentPageSearch, setCurrentPageSearch ] = useState(1)
     const [ Search, setSearch ] = useState(false)
+    const [ prevSearch, setPrevSearch ] = useState("")
 
     const styleMain =[styles.content, styles.container].join(' ');
     const stylePagination =[styles.pagination, styles.container].join(' ');
-    // const handleChange = (event, p) => {setCurrentPage(p)}
     const handleChange = (event, p) => { if (!Search) setCurrentPage(p)
                                          else setCurrentPageSearch(p)}
 
     useEffect(() => {
         if (Search) {
-            //setSearch(true)
             api_query_search(currentPageSearch, props.search).then((data) => {
                 setMovies(data.films), setPagesCountSearch(data.pagesCount)})
         } else {
             api_query(currentPage).then((data) => {
                 setMovies(data.films), setPagesCount(data.pagesCount)})} },[]);
-
     // currentPage
     useEffect(() => {
+        // prevValue.current = props.search;
     if (Search) {
         api_query_search(currentPageSearch, props.search).then((data) => {
             setMovies(data.films), setPagesCountSearch(data.pagesCount)})
     } else {
         api_query(currentPage).then((data) => {
             setMovies(data.films), setPagesCount(data.pagesCount)})} },[currentPage, currentPageSearch]);
-
-    // movies
-    useEffect(() => { console.log("==== movies ====>>> ", movies)} ,[movies]);
-
     // props.search
     useEffect(() => {
-            props.search!="" ? setSearch(true) : setSearch(false)
-         // console.log("========>>> ", Search)
+            props.search!="" ? setSearch(true) : setSearch(false);
+            if(prevSearch != props.search)  setPrevSearch(props.search);
         },[props.search]);
-
+    // Search
     useEffect(() => {
         if (Search) {
-            //setSearch(true)
+            setCurrentPageSearch(1);
             api_query_search(currentPageSearch, props.search).then((data) => {
                 setMovies(data.films), setPagesCountSearch(data.pagesCount)})
         } else {
+            setCurrentPage(1);
             api_query(currentPage).then((data) => {
-                setMovies(data.films), setPagesCount(data.pagesCount)})} },[Search]);
+                setMovies(data.films), setPagesCount(data.pagesCount)})}
+         },[Search, prevSearch]);
 
 
     return (

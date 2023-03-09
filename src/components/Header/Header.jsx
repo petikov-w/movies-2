@@ -55,7 +55,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 // export default function SearchAppBar() {
  export default function Header(props) {
      const [ movSearch, setMovSearch ] = useState("")
-    const handleSearch = (event) => {props.updateData(event.target.value)}
+    const handleSearch = (event) => {props.updateData(event.target.value), console.log('*****>>> ',event.target.value)}
      // useEffect(() => {
      //     // alert(movSearch)
      // },[movSearch]);
