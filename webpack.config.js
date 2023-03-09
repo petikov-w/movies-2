@@ -3,11 +3,8 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-// require('dotenv').config({ path: './.env' })
 const Dotenv = require('dotenv-webpack')
 
-//import { DefinePlugin } from 'webpack'
-//config({path: __dirname + '/.env.*'});
 
 const production = process.env.NODE_ENV === 'production';
 
@@ -62,13 +59,9 @@ module.exports = {
             filename: production ? '[name].[contenthash].css' : '[name].css',
         }),
         new Dotenv({
-            // path: `./.env${env.file ? `.${env.file}` : ''}`,
-            systemvars: true
+            path: './.env.local', // Path to .env file (this is the default)
+            systemvars: true,
         }),
-        // new webpack.DefinePlugin({
-        //     "process.env": JSON.stringify(process.env),
-        //     //API_KEY: JSON.stringify(process.env.REACT_APP_API_KEY)
-        // }),
     ],
     devServer: {
         port: 3001

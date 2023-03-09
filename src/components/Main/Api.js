@@ -13,10 +13,11 @@ export const api_off = {
     API_URL : "https://api.kinopoisk.dev/v1/movie?page=",
 }
 
+const API_KEY = process.env.REACT_APP_API_KEY;
 
 export const  api_query = (page) => {
-    console.log('======= key =======>>> ', api_noff.API_KEY)
-    console.log('API Key from Define Plugin:', API_KEY);
+    // console.log('======= key =======>>> ', API_KEY)
+    // console.log('API Key from Define Plugin:', API_KEY);
     return fetch(api_noff.API_URL + page, {
         headers: { "Content-Type": "application/json", "X-API-KEY": api_noff.API_KEY},})
         .then((responce) => responce.json())
