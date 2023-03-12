@@ -14,6 +14,12 @@ export const Mainfn = (props) => {
     const [ Search, setSearch ] = useState(false)
     const [ prevSearch, setPrevSearch ] = useState("")
 
+    const [currents, setCurrents] = useState({
+        Page: 1,
+        PageSearch: 1
+    })
+
+
     const styleMain =[styles.content, styles.container].join(' ');
     const stylePagination =[styles.pagination, styles.container].join(' ');
     const handleChange = (event, p) => { if (!Search) setCurrentPage(p)
