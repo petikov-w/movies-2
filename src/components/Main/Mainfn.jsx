@@ -22,25 +22,46 @@ export const Mainfn = (props) => {
 
     const styleMain =[styles.content, styles.container].join(' ');
     const stylePagination =[styles.pagination, styles.container].join(' ');
-    const handleChange = (event, p) => { if (!Search) setCurrentPage(p)
-                                         else setCurrentPageSearch(p)}
+    const handleChange = (event, p) => { if (!Search) setCurrents.Page(p)
+                                         else setCurrents.PageSearch(p)}
+    // const handleChange = (event, p) => { if (!Search) setCurrentPage(p)
+    //                                      else setCurrentPageSearch(p)}
 
     useEffect(() => {
         if (Search) {
-            api_query_search(currentPageSearch, props.search).then((data) => {
+            api_query_search(currents.PageSearch, props.search).then((data) => {
                 setMovies(data.films), setPagesCountSearch(data.pagesCount)})
         } else {
-            api_query(currentPage).then((data) => {
+            api_query(currents.Page).then((data) => {
                 setMovies(data.films), setPagesCount(data.pagesCount)})} },[]);
+    // useEffect(() => {
+    //     if (Search) {
+    //         api_query_search(currentPageSearch, props.search).then((data) => {
+    //             setMovies(data.films), setPagesCountSearch(data.pagesCount)})
+    //     } else {
+    //         api_query(currentPage).then((data) => {
+    //             setMovies(data.films), setPagesCount(data.pagesCount)})} },[]);
+
     // currentPage
     useEffect(() => {
-        // prevValue.current = props.search;
     if (Search) {
-        api_query_search(currentPageSearch, props.search).then((data) => {
+        api_query_search(currents.PageSearch, props.search).then((data) => {
             setMovies(data.films), setPagesCountSearch(data.pagesCount)})
     } else {
-        api_query(currentPage).then((data) => {
-            setMovies(data.films), setPagesCount(data.pagesCount)})} },[currentPage, currentPageSearch]);
+        api_query(currents.Page).then((data) => {
+            setMovies(data.films), setPagesCount(data.pagesCount)})} },[currents.Page, currents.PageSearch]);
+
+    // useEffect(() => {
+    // if (Search) {
+    //     api_query_search(currentPageSearch, props.search).then((data) => {
+    //         setMovies(data.films), setPagesCountSearch(data.pagesCount)})
+    // } else {
+    //     api_query(currentPage).then((data) => {
+    //         setMovies(data.films), setPagesCount(data.pagesCount)})} },[currentPage, currentPageSearch]);
+
+
+
+
     // props.search
     useEffect(() => {
             props.search!="" ? setSearch(true) : setSearch(false);
@@ -66,10 +87,18 @@ export const Mainfn = (props) => {
                 <Pagination count={!Search ? pagesCount : pagesCountSearch}
                             color="primary"
                             className={stylePagination}
-                            page={!Search ? currentPage : currentPageSearch}
+                            page={!Search ? currents.Page : currents.PageSearch}
                             onChange={handleChange}
                 />
             </Stack>
+            {/*<Stack spacing={2}>*/}
+            {/*    <Pagination count={!Search ? pagesCount : pagesCountSearch}*/}
+            {/*                color="primary"*/}
+            {/*                className={stylePagination}*/}
+            {/*                page={!Search ? currentPage : currentPageSearch}*/}
+            {/*                onChange={handleChange}*/}
+            {/*    />*/}
+            {/*</Stack>*/}
             <div className={styleMain}>
                 {movies.length ? (<Movies movies={movies} />
                 ) : (<h3>Загрузка...</h3>)}
