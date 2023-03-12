@@ -22,52 +22,75 @@ export const Mainfn = (props) => {
 
     const styleMain =[styles.content, styles.container].join(' ');
     const stylePagination =[styles.pagination, styles.container].join(' ');
-    const handleChange = (event, p) => { if (!Search) setCurrents.Page(p)
-                                         else setCurrents.PageSearch(p)}
-    // const handleChange = (event, p) => { if (!Search) setCurrentPage(p)
-    //                                      else setCurrentPageSearch(p)}
+    // const handleChange = (event, p) => { if (!Search) setCurrents(()=> {return {Page: p}})
+    //                                      else setCurrents(()=>{return {PageSearch: p}})}
 
-    useEffect(() => {
-        if (Search) {
-            api_query_search(currents.PageSearch, props.search).then((data) => {
-                setMovies(data.films), setPagesCountSearch(data.pagesCount)})
-        } else {
-            api_query(currents.Page).then((data) => {
-                setMovies(data.films), setPagesCount(data.pagesCount)})} },[]);
+    const handleChange = (event, p) => { if (!Search) setCurrentPage(p)
+                                         else {
+        if(p<=20) setCurrentPageSearch(p)
+        else setCurrentPageSearch(1)
+    }}
+
+
+
     // useEffect(() => {
     //     if (Search) {
-    //         api_query_search(currentPageSearch, props.search).then((data) => {
+    //         api_query_search(currents.PageSearch, props.search).then((data) => {
     //             setMovies(data.films), setPagesCountSearch(data.pagesCount)})
     //     } else {
-    //         api_query(currentPage).then((data) => {
+    //         api_query(currents.Page).then((data) => {
     //             setMovies(data.films), setPagesCount(data.pagesCount)})} },[]);
+    useEffect(() => {
+        if (Search) {
+            api_query_search(currentPageSearch, props.search).then((data) => {
+                setMovies(data.films), setPagesCountSearch(data.pagesCount)})
+        } else {
+            api_query(currentPage).then((data) => {
+                setMovies(data.films), setPagesCount(data.pagesCount)})} },[]);
+
+
 
     // currentPage
-    useEffect(() => {
-    if (Search) {
-        api_query_search(currents.PageSearch, props.search).then((data) => {
-            setMovies(data.films), setPagesCountSearch(data.pagesCount)})
-    } else {
-        api_query(currents.Page).then((data) => {
-            setMovies(data.films), setPagesCount(data.pagesCount)})} },[currents.Page, currents.PageSearch]);
-
     // useEffect(() => {
     // if (Search) {
-    //     api_query_search(currentPageSearch, props.search).then((data) => {
+    //     api_query_search(currents.PageSearch, props.search).then((data) => {
     //         setMovies(data.films), setPagesCountSearch(data.pagesCount)})
     // } else {
-    //     api_query(currentPage).then((data) => {
-    //         setMovies(data.films), setPagesCount(data.pagesCount)})} },[currentPage, currentPageSearch]);
+    //     api_query(currents.Page).then((data) => {
+    //         setMovies(data.films), setPagesCount(data.pagesCount)})} },[currents.Page, currents.PageSearch]);
 
-
-
+    useEffect(() => {
+    if (Search) {
+        api_query_search(currentPageSearch, props.search).then((data) => {
+            setMovies(data.films), setPagesCountSearch(data.pagesCount)})
+    } else {
+        api_query(currentPage).then((data) => {
+            setMovies(data.films), setPagesCount(data.pagesCount)})} },[currentPage, currentPageSearch]);
 
     // props.search
     useEffect(() => {
-            props.search!="" ? setSearch(true) : setSearch(false);
-            if(prevSearch != props.search)  setPrevSearch(props.search);
-        },[props.search]);
+        props.search!="" ? setSearch(true) : setSearch(false);
+        if(prevSearch != props.search)  setPrevSearch(props.search);
+    },[props.search]);
+
+
     // Search
+    // useEffect(() => {
+    //     if (Search) {
+    //         // setCurrentPageSearch(1);
+    //        // setCurrents(()=> {return {PageSearch: 1}})
+    //        //  setCurrents((actual)=> {actual.PageSearch=1
+    //        //                                return actual;})
+    //         api_query_search(1, props.search).then((data) => {
+    //             setMovies(data.films), setPagesCountSearch(data.pagesCount)})
+    //     } else {
+    //         // setCurrentPage(1);
+    //         // setCurrents((actual)=> {actual.Page=1
+    //         //                               return actual;})
+    //         api_query(1).then((data) => {
+    //             setMovies(data.films), setPagesCount(data.pagesCount)})}
+    //      },[Search, prevSearch]);
+
     useEffect(() => {
         if (Search) {
             setCurrentPageSearch(1);
@@ -83,22 +106,22 @@ export const Mainfn = (props) => {
     return (
 
         <main >
-            <Stack spacing={2}>
-                <Pagination count={!Search ? pagesCount : pagesCountSearch}
-                            color="primary"
-                            className={stylePagination}
-                            page={!Search ? currents.Page : currents.PageSearch}
-                            onChange={handleChange}
-                />
-            </Stack>
             {/*<Stack spacing={2}>*/}
             {/*    <Pagination count={!Search ? pagesCount : pagesCountSearch}*/}
             {/*                color="primary"*/}
             {/*                className={stylePagination}*/}
-            {/*                page={!Search ? currentPage : currentPageSearch}*/}
+            {/*                page={!Search ? currents.Page : currents.PageSearch}*/}
             {/*                onChange={handleChange}*/}
             {/*    />*/}
             {/*</Stack>*/}
+            <Stack spacing={2}>
+                <Pagination count={!Search ? pagesCount : pagesCountSearch}
+                            color="primary"
+                            className={stylePagination}
+                            page={!Search ? currentPage : currentPageSearch}
+                            onChange={handleChange}
+                />
+            </Stack>
             <div className={styleMain}>
                 {movies.length ? (<Movies movies={movies} />
                 ) : (<h3>Загрузка...</h3>)}
