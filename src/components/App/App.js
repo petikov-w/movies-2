@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import Header from "../Header/Header";
 import {Footer} from "../Footer";
 //import {Maink} from "../Main/Maink";
-import {Mainfn} from "../Main/Mainfn";
+import {Main} from "../Main/Main";
 
 
 // const onClickEvent = (e) => {
@@ -21,7 +21,7 @@ const App = () => {
     return (
         <React.Fragment>
             <Header updateData={updateData}/>
-            <Mainfn search={movSearch}/>
+            <Main search={movSearch}/>
             <Footer />
         </React.Fragment>
 

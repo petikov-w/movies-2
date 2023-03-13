@@ -1,1 +1,1 @@
-export { Maink } from './Maink'
+export { Main } from './Main'
